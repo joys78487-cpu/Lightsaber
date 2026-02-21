@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sith Saber</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:black;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial, sans-serif;
+    overflow:hidden;
+}
+
+/* Saber container */
+.saber{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-bottom:120px; /* SPACE between handle & button */
+}
+
+/* Blade */
+.blade{
+    width:18px;
+    height:65vh;
+    background:linear-gradient(to top,#ff0000,#ff3b3b,#ff0000);
+    border-radius:12px;
+    transform:scaleY(0);
+    transform-origin:bottom;
+    transition:transform 0.18s cubic-bezier(.2,1,.3,1);
+    box-shadow:
+        0 0 10px #ff0000,
+        0 0 20px #ff0000,
+        0 0 40px #ff0000,
+        0 0 80px #ff0000;
+}
+
+/* Ignited */
+.blade.active{
+    transform:scaleY(1);
+    animation:flicker 0.08s infinite alternate;
+}
+
+@keyframes flicker{
+    from{
+        box-shadow:
+            0 0 15px #ff0000,
+            0 0 30px #ff0000,
+            0 0 60px #ff0000;
+    }
+    to{
+        box-shadow:
+            0 0 25px #ff1a1a,
+            0 0 50px #ff0000,
+            0 0 90px #ff0000;
+    }
+}
+
+/* Handle */
+.handle{
+    width:50px;
+    height:160px;
+    background:linear-gradient(to right,#111,#333,#111);
+    border-radius:12px;
+    box-shadow:0 0 15px #000 inset;
+}
+
+/* Button */
+button{
+    position:fixed;
+    bottom:40px; /* keeps it lower */
+    left:50%;
+    transform:translateX(-50%);
+    padding:14px 40px;
+    background:#111;
+    color:red;
+    border:1px solid red;
+    font-size:18px;
+    letter-spacing:3px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:red;
+    color:black;
+}
+</style>
+</head>
+
+<body>
+
+<div class="saber">
+    <div class="blade" id="blade"></div>
+    <div class="handle"></div>
+</div>
+
+<button onclick="toggle()">IGNITE</button>
+
+<script>
+function toggle(){
+    document.getElementById("blade").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
